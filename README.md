@@ -134,4 +134,7 @@ Citation metadata has not yet been completed. Add verified author names, author 
 
 ## License
 
-No license has been selected. Until a license is added, no permission is granted for others to copy, modify, or redistribute the code beyond rights provided by applicable law.
+This project is licensed under the BSD 3-Clause License. See the [`LICENSE`](LICENSE) file for the full license text.
+
+Copyright © 2026 Nikol Volfová.
+
