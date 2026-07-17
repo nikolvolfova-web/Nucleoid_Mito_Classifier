@@ -81,9 +81,19 @@ For each input image, the plugin writes:
 
 A combined summary CSV is also written for all images in the selected batch.
 
-## Calibration warning
+## Spatial calibration requirement
 
-Version `v0.1c` calculates calibrated areas as pixel count × pixel width × pixel height, but the output columns are named with `_um2` regardless of the actual input calibration unit. Do not interpret these columns as square micrometres unless the image calibration unit has been verified as micrometres. This must be corrected before a validated public release.
+All input images must be spatially calibrated in micrometres (`µm`) before analysis.
+
+The plugin calculates calibrated areas as:
+
+* `Area_um2_manual = Area_px_manual × PixelWidth × PixelHeight`
+* `C3_MitoMask_OverlapArea_um2 = C3_MitoMask_OverlapArea_px × PixelWidth × PixelHeight`
+
+Therefore, `PixelWidth` and `PixelHeight` must be expressed in micrometres. Under this required input condition, the resulting area values are reported in square micrometres (`µm²`).
+
+Version `v0.1c` records `PixelWidth`, `PixelHeight`, and the calibration unit in the output CSV files. Users must verify the spatial calibration in Fiji before starting the analysis.
+
 
 ## Known limitations
 
