@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+title: "Nucleoid Mito Classifier"
+version: "0.1c"
+date-released: 2026-07-17
+authors:
+
+* family-names: "Volfová"
+  given-names: "Nikol"
+  license: "BSD-3-Clause"
