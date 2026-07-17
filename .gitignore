@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Java / Maven build output
+target/
+*.class
+*.jar
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*~
+
+# Analysis outputs and local data
+output/
+outputs/
+results/
+data/raw/
+data/processed/
+*.tif
+*.tiff
+*.csv
+
+# Allow small, intentionally versioned example fixtures
+!examples/**/*.tif
+!examples/**/*.tiff
+!examples/**/*.csv
