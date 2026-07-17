@@ -26,6 +26,17 @@ For every detected C1 ROI:
 
 The supplied `v0.1c` JAR was compiled with Java 21. A Maven build configuration is included to produce Java 8-compatible bytecode, but that build must be verified in both the intended Fiji installation and a clean test installation before release.
 
+## Tested environment
+
+Version `v0.1c` was successfully installed and tested in the following environment:
+
+* Fiji / ImageJ2: `2.18.0`
+* ImageJ1: `1.54p`
+* Java: `21.0.7` (64-bit)
+* Operating system: macOS Sequoia `15.7.7` (build `24G720`)
+
+The plugin JAR was downloaded from the GitHub Release, copied into `Fiji.app/plugins/`, and successfully used to run the analysis workflow.
+
 ## Input
 
 The current implementation expects a folder of `.tif` or `.tiff` images with exactly two channels:
