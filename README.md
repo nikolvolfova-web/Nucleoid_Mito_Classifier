@@ -1,4 +1,5 @@
 # Nucleoid Mito Classifier
+[![Maven build](https://github.com/nikolvolfova-web/Nucleoid_Mito_Classifier/actions/workflows/maven-build.yml/badge.svg?branch=main)](https://github.com/nikolvolfova-web/Nucleoid_Mito_Classifier/actions/workflows/maven-build.yml)
 
 Fiji/ImageJ 1.x Java plugin for classifying C1 nucleoid objects according to their fractional overlap with a mitochondria-derived C3 mask.
 
