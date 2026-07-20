@@ -45,9 +45,17 @@ The current implementation expects a folder of `.tif` or `.tiff` images with exa
 - C1: nucleoids.
 - C2: mitochondria.
 
-### Important dimensionality limitation
+### Input validation
 
-The code validates the number of channels but does not currently reject Z-stacks or time series. Several processing steps use the active 2D processor. Until this is corrected and tested, use only single-plane, single-time-point 2D images.
+Before analysis, the plugin verifies that every input image:
+
+* contains exactly two channels;
+* contains exactly one Z slice;
+* contains exactly one time point;
+* has valid positive pixel-width and pixel-height values;
+* uses a supported spatial calibration unit in micrometres.
+
+Images that do not meet these requirements are skipped and a corresponding message is written to the ImageJ log.
 
 ## Installation from a release JAR
 
