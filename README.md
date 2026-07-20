@@ -128,6 +128,10 @@ Compiled JAR files should normally be attached to a GitHub Release rather than c
 
 See [`CHANGELOG.md`](CHANGELOG.md).
 
+## Author
+
+Nikol Volfová
+
 ## Citation
 
 Citation metadata has not yet been completed. Add verified author names, author order, ORCID identifiers, affiliations, repository URL, license, and DOI only after confirmation by all relevant contributors.
