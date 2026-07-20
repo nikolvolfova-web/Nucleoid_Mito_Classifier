@@ -270,8 +270,17 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
             return;
         }
         int channels = input.getNChannels();
-        if (channels != 2) {
-            IJ.log("SKIPPED - expected exactly 2 channels, found channels=" + channels + " in " + inputFile.getName());
+        int slices = input.getNSlices();
+        int frames = input.getNFrames();
+
+        if (channels != 2 || slices != 1 || frames != 1) {
+            IJ.log(
+                    "SKIPPED - expected exactly 2 channels, 1 Z slice, and 1 time point; found " +
+                    "channels=" + channels +
+                    ", slices=" + slices +
+                    ", frames=" + frames +
+                    " in " + inputFile.getName()
+            );
             closeImage(input);
             return;
         }
@@ -282,6 +291,41 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         double pixelWidth = cal.pixelWidth;
         double pixelHeight = cal.pixelHeight;
         String unit = cal.getUnit();
+
+        String normalizedUnit = unit == null
+                ? ""
+                : unit.trim().toLowerCase(Locale.ROOT);
+
+        boolean unitIsMicrometres =
+                normalizedUnit.equals("µm") ||
+                normalizedUnit.equals("μm") ||
+                normalizedUnit.equals("um") ||
+                normalizedUnit.equals("micron") ||
+                normalizedUnit.equals("microns") ||
+                normalizedUnit.equals("micrometer") ||
+                normalizedUnit.equals("micrometers") ||
+                normalizedUnit.equals("micrometre") ||
+                normalizedUnit.equals("micrometres");
+
+        boolean pixelSizeIsValid =
+                pixelWidth > 0.0 &&
+                pixelHeight > 0.0 &&
+                !Double.isNaN(pixelWidth) &&
+                !Double.isNaN(pixelHeight) &&
+                !Double.isInfinite(pixelWidth) &&
+                !Double.isInfinite(pixelHeight);
+
+        if (!unitIsMicrometres || !pixelSizeIsValid) {
+            IJ.log(
+                    "SKIPPED - expected spatial calibration in micrometres with valid pixel dimensions; found " +
+                    "PixelWidth=" + pixelWidth +
+                    ", PixelHeight=" + pixelHeight +
+                    ", Unit=" + unit +
+                    " in " + inputFile.getName()
+            );
+            closeImage(input);
+            return;
+        }
 
         closeIfOpen("Label Image");
         RoiManager rm = RoiManager.getInstance2();
