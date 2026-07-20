@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- TODO: replace with a verified reverse-domain identifier owned by the project or institution. -->
-    <groupId>TODO.GROUP_ID</groupId>
+<!-- Maven coordinate namespace derived from the GitHub repository owner. -->
+<groupId>io.github.nikolvolfovaweb</groupId>
     <artifactId>Nucleoid_Mito_Classifier</artifactId>
     <version>0.1c</version>
     <packaging>jar</packaging>
