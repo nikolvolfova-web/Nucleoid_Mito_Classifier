@@ -56,7 +56,7 @@ The code validates the number of channels but does not currently reject Z-stacks
 4. Remove older matching plugin `.jar`, `.java`, and `.class` files from `Fiji.app/plugins/`.
 5. Copy `Nucleoid_Mito_Classifier_v0_1c.jar` into `Fiji.app/plugins/`.
 6. Restart Fiji.
-7. Run **Plugins → Analyze → Nucleoid Mito Classifier v0.1c**.
+7. Run **Plugins → Nucleoid Mito Classifier v0.1c**.
 
 ## Usage
 
@@ -67,7 +67,7 @@ The code validates the number of channels but does not currently reject Z-stacks
    * uses C1 for nucleoids and C2 for mitochondria;
    * is a single-plane, single-time-point 2D image;
    * is spatially calibrated in micrometres (`µm`).
-3. Start the plugin using **Plugins → Analyze → Nucleoid Mito Classifier v0.1c**.
+3. Start the plugin using **Plugins → Nucleoid Mito Classifier v0.1c**.
 4. Select the input folder containing the original TIFF images.
 5. Select or create a separate output folder for CSV files and QC images.
 6. Review the analysis parameters in the plugin dialog.
