@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 
 ### Added
 
+- Preventive validation of the supported input format: exactly two channels, one Z slice, one time point, valid positive pixel dimensions, and spatial calibration in micrometres (`µm`).
+
 * BSD 3-Clause License.
 * `CITATION.cff` citation metadata.
 * Verified author information.
@@ -16,12 +18,10 @@ All notable changes to this project are documented in this file.
 
 ### Remaining before a stable public release
 
-* Enforce the supported single-plane, single-time-point 2D input format in the code.
 * Verify StarDist input handling when debug mode is enabled.
 * Avoid affecting unrelated ImageJ windows or an existing ROI Manager.
 * Use an identical CSV schema when no C1 objects are detected.
 * Add regression tests using non-sensitive example images.
-* Optionally add automatic validation of the input calibration unit.
 
 ## [0.1c] - 2026-07-17
 
