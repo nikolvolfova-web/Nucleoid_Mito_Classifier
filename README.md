@@ -183,7 +183,17 @@ The example input image and its reference outputs are distributed under CC BY 4.
 
 ## Citation
 
-Citation metadata has not yet been completed. Add verified author names, author order, ORCID identifiers, affiliations, repository URL, license, and DOI only after confirmation by all relevant contributors.
+Citation metadata are provided in [`CITATION.cff`](CITATION.cff).
+
+**Author:** Nikol Volfová
+**ORCID:** [0000-0002-8040-2610](https://orcid.org/0000-0002-8040-2610)
+
+**Affiliations:**
+
+1. Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague, Prague, Czech Republic
+2. Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic
+
+A DOI will be added after a stable GitHub Release has been archived through Zenodo.
 
 ## License
 
