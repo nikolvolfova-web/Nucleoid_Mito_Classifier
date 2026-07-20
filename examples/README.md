@@ -76,12 +76,31 @@ The reference ZIP contains `SHA256SUMS.txt`. After extracting the archive, verif
 shasum -a 256 -c SHA256SUMS.txt
 ```
 
-## Data provenance and licence
+## Data provenance, attribution, and licence
 
-* Data provenance: anonymized example image derived from a collaborative microscopy project originally carried out at the First Faculty of Medicine, Charles University.
-* Permission to redistribute the example image: confirmed by the project lead.
-* Licence for the example data: CC BY 4.0.
+### Creator
 
-The example image is included only as a small reproducible test fixture for validating the software workflow and reference outputs.
+Nikol Volfová
 
-These values must be verified before the repository is made public or archived on Zenodo.
+### Affiliations
+
+1. Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague, Prague, Czech Republic
+2. Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic
+
+### Data provenance
+
+The example image was derived from a collaborative microscopy project carried out at the First Faculty of Medicine, Charles University.
+
+The image was anonymized and cleaned of unnecessary metadata for use as a reproducible software test fixture. Permission to publicly redistribute this specific example image was confirmed by the project lead.
+
+### Licence
+
+The example input image and the associated reference outputs are made available under the Creative Commons Attribution 4.0 International licence (CC BY 4.0).
+
+Suggested attribution:
+
+> Volfová, Nikol. *Nucleoid Mito Classifier example dataset*. Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University. 2026. CC BY 4.0.
+
+This data licence applies only to the example input image and reference outputs stored in the `examples/` directory. The Nucleoid Mito Classifier software source code is distributed separately under the BSD 3-Clause License.
+
+The example dataset is provided as a reproducible software test fixture. It is not presented as a biological benchmark or as validation across different microscopy systems, sample types, or acquisition conditions.
