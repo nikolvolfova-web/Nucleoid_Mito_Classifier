@@ -137,15 +137,15 @@ Version `v0.1c` records `PixelWidth`, `PixelHeight`, and the calibration unit in
 
 ## Known limitations
 
-See [`docs/TECHNICAL_AUDIT.md`](docs/TECHNICAL_AUDIT.md). The most important unresolved items are:
+See [`docs/TECHNICAL_AUDIT.md`](docs/TECHNICAL_AUDIT.md) for the detailed technical review. The most important unresolved items are:
 
-- unit validation for calibrated areas;
-- explicit dimensionality validation or stack/time-series support;
-- reliable StarDist input handling in debug mode;
-- avoiding destructive changes to a pre-existing ROI Manager or unrelated ImageJ windows;
-- consistent CSV schema for images with zero detected objects;
-- complete logging of all analysis parameters;
-- automated tests with non-sensitive example images.
+* reliable StarDist input handling when debug mode is enabled;
+* avoiding destructive changes to a pre-existing ROI Manager or unrelated ImageJ windows;
+* consistent CSV schema for images with zero detected objects;
+* complete logging of all analysis parameters;
+* automated regression testing of representative outputs.
+
+A non-sensitive example input and documented reference outputs are available in the [`examples/`](examples/) directory. These support manual reproducibility checks but do not yet constitute a fully automated test suite.
 
 ## Repository policy
 
