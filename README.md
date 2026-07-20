@@ -50,11 +50,13 @@ The code validates the number of channels but does not currently reject Z-stacks
 
 ## Installation from a release JAR
 
-1. Close Fiji.
-2. Remove older matching plugin `.jar`, `.java`, and `.class` files from `Fiji.app/plugins/`.
-3. Copy `Nucleoid_Mito_Classifier_v0_1c.jar` into `Fiji.app/plugins/`.
-4. Restart Fiji or use **Help → Refresh Menus**.
-5. Run **Plugins → Analyze → Nucleoid Mito Classifier v0.1c**.
+1. Open the **Releases** section of this repository.
+2. Select the required release and download `Nucleoid_Mito_Classifier_v0_1c.jar` from **Assets**. Do not download the automatically generated source-code archives for plugin installation.
+3. Close Fiji.
+4. Remove older matching plugin `.jar`, `.java`, and `.class` files from `Fiji.app/plugins/`.
+5. Copy `Nucleoid_Mito_Classifier_v0_1c.jar` into `Fiji.app/plugins/`.
+6. Restart Fiji.
+7. Run **Plugins → Analyze → Nucleoid Mito Classifier v0.1c**.
 
 ## Building from source
 
