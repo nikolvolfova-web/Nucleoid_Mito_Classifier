@@ -411,7 +411,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
             new ImagePlus("ALL_C1_LABELS", new ByteProcessor(width, height));
         } else {
             rm.reset();
-            if (!s.debugMode) c1prep.show(); // StarDist needs an open image title as input.
+            if (c1prep.getWindow() == null) c1prep.show(); // StarDist needs an open image title as input.
             runStarDist(c1prep, s);
         }
 
