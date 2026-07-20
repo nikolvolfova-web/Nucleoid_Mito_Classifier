@@ -175,7 +175,6 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         int processed = 0;
         for (File f : files) {
             RoiManagerState roiManagerState = captureRoiManagerState();
-            int[] openImageIdsBefore = snapshotOpenImageIds();
             try {
                 processOneImage(f, outDir, s, summary);
                 processed++;
@@ -184,7 +183,6 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
                 t.printStackTrace();
             } finally {
                 restoreRoiManagerState(roiManagerState);
-                closeImagesOpenedAfter(openImageIdsBefore);
             }
         }
 
@@ -574,9 +572,14 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         IJ.log("OUT_OF_MITO objects = " + outCount);
         IJ.log("Filtered objects = " + filteredCount);
 
-        closeImage(c1);
-        closeImage(c2);
-        closeImage(c1prep);
+        // Keep the diagnostic input and label windows open only in debug mode.
+        if (!s.debugMode) {
+            closeImage(c1);
+            closeImage(c2);
+            closeImage(c1prep);
+            if (labels != null) closeImage(labels);
+        }
+
         closeImage(mito.mask);
         closeImage(c3class);
         closeImage(colocMask);
@@ -584,7 +587,6 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         closeImage(outMask);
         closeImage(filtMask);
         closeImage(decisionImp);
-        if (labels != null) closeImage(labels);
         if (rm != null) rm.reset();
     }
 
@@ -1043,16 +1045,6 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
             }
         }
         return null;
-    }
-
-    private static void closeImagesOpenedAfter(int[] previousIds) {
-        int[] currentIds = WindowManager.getIDList();
-        if (currentIds == null) return;
-        for (int id : currentIds) {
-            if (!containsImageId(previousIds, id)) {
-                closeImage(WindowManager.getImage(id));
-            }
-        }
     }
 
     /**
