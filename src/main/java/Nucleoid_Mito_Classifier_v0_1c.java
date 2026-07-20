@@ -126,6 +126,12 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         MitoMaskQC qc;
     }
 
+    static class RoiManagerState {
+        boolean existed;
+        boolean visible;
+        Roi[] rois;
+    }
+
     @Override
     public void run(String arg) {
         Settings s = askSettings();
@@ -168,13 +174,15 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
 
         int processed = 0;
         for (File f : files) {
+            RoiManagerState roiManagerState = captureRoiManagerState();
             try {
                 processOneImage(f, outDir, s, summary);
                 processed++;
             } catch (Throwable t) {
                 IJ.log("ERROR while processing " + f.getName() + ": " + t.getMessage());
                 t.printStackTrace();
-                runCloseAll();
+            } finally {
+                restoreRoiManagerState(roiManagerState);
             }
         }
 
@@ -327,7 +335,6 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
             return;
         }
 
-        closeIfOpen("Label Image");
         RoiManager rm = RoiManager.getInstance2();
         if (rm == null) rm = new RoiManager(false);
         rm.reset();
@@ -406,9 +413,9 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         int outCount = 0;
         int filteredCount = 0;
 
+        int[] imageIdsBeforeStarDist = snapshotOpenImageIds();
         if (prepStats.max <= 0 || prepStats.stdDev <= 0) {
             IJ.log("SKIPPED StarDist - C1 image is empty or flat.");
-            new ImagePlus("ALL_C1_LABELS", new ByteProcessor(width, height));
         } else {
             rm.reset();
             if (c1prep.getWindow() == null) c1prep.show(); // StarDist needs an open image title as input.
@@ -421,7 +428,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         allCount = rois.length;
         IJ.log("All C1 objects detected = " + allCount);
 
-        ImagePlus labels = WindowManager.getImage("Label Image");
+        ImagePlus labels = findNewImageByTitlePrefix(imageIdsBeforeStarDist, "Label Image");
         if (labels != null) {
             labels.setTitle("ALL_C1_LABELS");
             saveTiff(labels, new File(outDir, base + "-AllC1_LabelImage.tif"));
@@ -565,9 +572,14 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         IJ.log("OUT_OF_MITO objects = " + outCount);
         IJ.log("Filtered objects = " + filteredCount);
 
-        closeImage(c1);
-        closeImage(c2);
-        closeImage(c1prep);
+        // Keep the diagnostic input and label windows open only in debug mode.
+        if (!s.debugMode) {
+            closeImage(c1);
+            closeImage(c2);
+            closeImage(c1prep);
+            if (labels != null) closeImage(labels);
+        }
+
         closeImage(mito.mask);
         closeImage(c3class);
         closeImage(colocMask);
@@ -575,7 +587,6 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         closeImage(outMask);
         closeImage(filtMask);
         closeImage(decisionImp);
-        if (labels != null) closeImage(labels);
         if (rm != null) rm.reset();
     }
 
@@ -963,9 +974,77 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         if (imp != null) imp.changes = false;
     }
 
-    private static void closeIfOpen(String title) {
-        ImagePlus imp = WindowManager.getImage(title);
-        closeImage(imp);
+    private static RoiManagerState captureRoiManagerState() {
+        RoiManagerState state = new RoiManagerState();
+        RoiManager rm = RoiManager.getInstance2();
+        state.existed = rm != null;
+        state.visible = rm != null && rm.isVisible();
+        state.rois = cloneRois(rm == null ? null : rm.getRoisAsArray());
+        return state;
+    }
+
+    private static void restoreRoiManagerState(RoiManagerState state) {
+        if (state == null) return;
+        RoiManager rm = RoiManager.getInstance2();
+
+        if (!state.existed) {
+            if (rm != null) {
+                try {
+                    rm.reset();
+                    rm.close();
+                } catch (Throwable ignored) {
+                }
+            }
+            return;
+        }
+
+        if (rm == null) {
+            rm = state.visible ? new RoiManager() : new RoiManager(false);
+        }
+        rm.reset();
+        for (Roi roi : state.rois) {
+            if (roi != null) rm.addRoi((Roi) roi.clone());
+        }
+        try {
+            rm.setVisible(state.visible);
+        } catch (Throwable ignored) {
+        }
+    }
+
+    private static Roi[] cloneRois(Roi[] rois) {
+        if (rois == null || rois.length == 0) return new Roi[0];
+        Roi[] copies = new Roi[rois.length];
+        for (int i = 0; i < rois.length; i++) {
+            copies[i] = rois[i] == null ? null : (Roi) rois[i].clone();
+        }
+        return copies;
+    }
+
+    private static int[] snapshotOpenImageIds() {
+        int[] ids = WindowManager.getIDList();
+        return ids == null ? new int[0] : ids.clone();
+    }
+
+    private static boolean containsImageId(int[] ids, int id) {
+        if (ids == null) return false;
+        for (int candidate : ids) {
+            if (candidate == id) return true;
+        }
+        return false;
+    }
+
+    private static ImagePlus findNewImageByTitlePrefix(int[] previousIds, String prefix) {
+        int[] currentIds = WindowManager.getIDList();
+        if (currentIds == null) return null;
+        for (int i = currentIds.length - 1; i >= 0; i--) {
+            int id = currentIds[i];
+            if (containsImageId(previousIds, id)) continue;
+            ImagePlus imp = WindowManager.getImage(id);
+            if (imp != null && imp.getTitle() != null && imp.getTitle().startsWith(prefix)) {
+                return imp;
+            }
+        }
+        return null;
     }
 
     /**
@@ -984,13 +1063,6 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
                 imp.close();
             } catch (Throwable ignored) {
             }
-        }
-    }
-
-    private static void runCloseAll() {
-        try {
-            IJ.run("Close All");
-        } catch (Throwable ignored) {
         }
     }
 }
