@@ -58,6 +58,24 @@ The code validates the number of channels but does not currently reject Z-stacks
 6. Restart Fiji.
 7. Run **Plugins → Analyze → Nucleoid Mito Classifier v0.1c**.
 
+## Usage
+
+1. Prepare a folder containing the original two-channel `.tif` or `.tiff` images.
+2. Verify in Fiji that every input image:
+
+   * contains exactly two channels;
+   * uses C1 for nucleoids and C2 for mitochondria;
+   * is a single-plane, single-time-point 2D image;
+   * is spatially calibrated in micrometres (`µm`).
+3. Start the plugin using **Plugins → Analyze → Nucleoid Mito Classifier v0.1c**.
+4. Select the input folder containing the original TIFF images.
+5. Select or create a separate output folder for CSV files and QC images.
+6. Review the analysis parameters in the plugin dialog.
+7. Click **OK** to start batch processing.
+8. After processing, review the decision QC images, mitochondrial-mask QC files, per-object CSV files, and the combined summary CSV.
+
+Use a separate output folder and do not place generated outputs in the input folder.
+
 ## Building from source
 
 Requirements:
