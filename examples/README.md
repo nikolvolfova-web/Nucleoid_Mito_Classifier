@@ -78,8 +78,10 @@ shasum -a 256 -c SHA256SUMS.txt
 
 ## Data provenance and licence
 
-* Data provenance: `TODO`
-* Permission to redistribute the example image: `TODO`
-* Licence for the example data: `TODO`
+* Data provenance: anonymized example image derived from a collaborative microscopy project originally carried out at the First Faculty of Medicine, Charles University.
+* Permission to redistribute the example image: confirmed by the project lead.
+* Licence for the example data: CC BY 4.0.
+
+The example image is included only as a small reproducible test fixture for validating the software workflow and reference outputs.
 
 These values must be verified before the repository is made public or archived on Zenodo.
