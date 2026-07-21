@@ -30,7 +30,7 @@ import java.util.Comparator;
 import java.util.Locale;
 
 /**
- * Nucleoid_Mito_Classifier_v0_1c
+ * Nucleoid_Mito_Classifier_v0_2_0
  *
  * Fiji/ImageJ IJ1 plugin.
  *
@@ -47,10 +47,10 @@ import java.util.Locale;
  *   - Auto Local Threshold plugin, only if LOCAL_PHANSALKAR fallback is enabled and needed
  *
  * Install/test:
- *   Fiji > Plugins > New > Plugin, paste this code, save as Nucleoid_Mito_Classifier_v0_1c.java
+ *   Fiji > Plugins > New > Plugin, paste this code, save as Nucleoid_Mito_Classifier_v0_2_0.java
  *   or copy this file into Fiji.app/plugins/ and run Plugins > Compile and Run...
  */
-public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
+public class Nucleoid_Mito_Classifier_v0_2_0 implements PlugIn {
 
     private static final Locale CSV_LOCALE = Locale.US;
 
@@ -156,7 +156,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         Arrays.sort(files, Comparator.comparing(File::getName));
 
         IJ.log("\\Clear");
-        IJ.log("Nucleoid_Mito_Classifier_v0_1c");
+        IJ.log("Nucleoid_Mito_Classifier_v0_2_0");
         IJ.log("Input: " + inDir.getAbsolutePath());
         IJ.log("Output: " + outDir.getAbsolutePath());
         IJ.log("Files: " + files.length);
@@ -202,7 +202,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         s.inputDir = input;
         s.outputDir = output;
 
-        GenericDialog gd = new GenericDialog("Nucleoid Mito Classifier v0.1c");
+        GenericDialog gd = new GenericDialog("Nucleoid Mito Classifier v0.2.0");
         gd.addMessage("Core rule: C3 mask classifies full C1 nucleoid ROIs only. C3 never clips C1 morphology.");
 
         gd.addMessage("C3 mitochondrial mask from C2");
@@ -536,7 +536,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
             rt.setValue("PixelWidth", row, pixelWidth);
             rt.setValue("PixelHeight", row, pixelHeight);
             rt.setValue("Unit", row, unit);
-            rt.setValue("PluginVersion", row, "v0.1c");
+            rt.setValue("PluginVersion", row, "v0.2.0");
         }
         c1.deleteRoi();
         c2.deleteRoi();
@@ -904,7 +904,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
     private void writeSettingsLog(File outDir, String base, Settings s, double pixelWidth, double pixelHeight, String unit) throws IOException {
         File f = new File(outDir, base + "-Analysis_Log.txt");
         try (PrintWriter pw = new PrintWriter(new FileWriter(f, false))) {
-            pw.println("Nucleoid_Mito_Classifier_v0_1c");
+            pw.println("Nucleoid_Mito_Classifier_v0_2_0");
             pw.println("Core rule: C1 ROIs are measured whole; C3 is used only for classification.");
             pw.println("pixelWidth=" + pixelWidth);
             pw.println("pixelHeight=" + pixelHeight);

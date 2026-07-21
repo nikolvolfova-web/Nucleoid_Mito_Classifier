@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<!-- Maven coordinate namespace derived from the GitHub repository owner. -->
-<groupId>io.github.nikolvolfovaweb</groupId>
+    <!-- Maven coordinate namespace derived from the GitHub repository owner. -->
+    <groupId>io.github.nikolvolfovaweb</groupId>
     <artifactId>Nucleoid_Mito_Classifier</artifactId>
-    <version>0.1c</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <name>Nucleoid Mito Classifier</name>
@@ -30,22 +30,25 @@
     </dependencies>
 
     <build>
-        <finalName>Nucleoid_Mito_Classifier_v0_1c</finalName>
+        <finalName>Nucleoid_Mito_Classifier_v0_2_0</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.4.2</version>
+
                 <configuration>
                     <archive>
                         <manifestEntries>
                             <Implementation-Title>Nucleoid Mito Classifier</Implementation-Title>
-                            <Implementation-Version>0.1c</Implementation-Version>
+                            <Implementation-Version>0.2.0</Implementation-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
