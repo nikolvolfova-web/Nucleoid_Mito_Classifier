@@ -9,6 +9,6 @@ authors:
 * family-names: "Volfová"
   given-names: "Nikol"
   orcid: "https://orcid.org/0000-0002-8040-2610"
-  affiliation: "Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague, Prague, Czech Republic; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic"
+  affiliation: "Department of Paediatrics and Inherited Metabolic Disorders, First Faculty of Medicine, Charles University and General University Hospital in Prague, Prague, Czech Republic; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic"
   license: BSD-3-Clause
   repository-code: "https://github.com/nikolvolfova-web/Nucleoid_Mito_Classifier"
