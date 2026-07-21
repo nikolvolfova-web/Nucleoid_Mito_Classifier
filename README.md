@@ -4,7 +4,7 @@
 
 Fiji/ImageJ 1.x Java plugin for classifying C1 nucleoid objects according to their fractional overlap with a mitochondria-derived C3 mask.
 
-> **Project status:** release candidate for version `v0.2.0`. The workflow-generated JAR must be tested in Fiji before the corresponding GitHub Release is published.
+> **Current version:** `v0.2.0`. The workflow-generated JAR has been successfully built, installed, and tested in Fiji using the documented reproducible example dataset.
 
 ## Methodological principle
 
@@ -28,18 +28,18 @@ For every detected C1 ROI:
 * `CSBDeep`, `StarDist`, and `TensorFlow` Fiji update sites enabled;
 * Auto Local Threshold plugin when the optional local Phansalkar fallback is enabled and triggered.
 
-The Maven configuration produces Java 8-compatible bytecode. Release JARs must still be tested in the intended Fiji environment before scientific use.
+The Maven configuration produces Java 8-compatible bytecode. Release JARs should still be tested in the intended Fiji environment before scientific use.
 
 ## Tested environment
 
-Version `v0.1c` and subsequent development builds leading to `v0.2.0` were successfully tested in:
+Version `v0.2.0` was successfully installed and tested in:
 
 * Fiji / ImageJ2: `2.18.0`;
 * ImageJ1: `1.54p`;
 * Java: `21.0.7` (64-bit);
 * operating system: macOS Sequoia `15.7.7` (build `24G720`).
 
-The final `v0.2.0` workflow artifact must be tested again before the release is published.
+The final workflow-generated `v0.2.0` JAR was successfully installed and tested in Fiji before publication.
 
 ## Input requirements
 
@@ -57,7 +57,14 @@ Every input image must have:
 
 ### Input validation
 
-Before analysis, the plugin verifies the number of channels, Z slices, time points, calibration unit, pixel width, and pixel height.
+Before analysis, the plugin verifies:
+
+* the number of channels;
+* the number of Z slices;
+* the number of time points;
+* the spatial calibration unit;
+* pixel width;
+* pixel height.
 
 Images that do not meet the supported input requirements are skipped, and a corresponding message is written to the ImageJ log.
 
@@ -66,12 +73,27 @@ Images that do not meet the supported input requirements are skipped, and a corr
 1. Open the **Releases** section of this repository.
 2. Select release `v0.2.0`.
 3. Download `Nucleoid_Mito_Classifier_v0_2_0.jar` from **Assets**.
-4. Do not download the automatically generated source-code archives for plugin installation.
-5. Close Fiji.
-6. Remove older matching plugin `.jar`, `.java`, and `.class` files from `Fiji.app/plugins/`.
-7. Copy `Nucleoid_Mito_Classifier_v0_2_0.jar` into `Fiji.app/plugins/`.
-8. Restart Fiji.
-9. Run **Plugins → Nucleoid Mito Classifier v0.2.0**.
+4. Optionally download `SHA256SUMS.txt` to verify the downloaded JAR.
+5. Do not use the automatically generated source-code archives for plugin installation.
+6. Close Fiji.
+7. Remove older matching plugin `.jar`, `.java`, and `.class` files from `Fiji.app/plugins/`.
+8. Copy `Nucleoid_Mito_Classifier_v0_2_0.jar` into `Fiji.app/plugins/`.
+9. Restart Fiji.
+10. Run **Plugins → Nucleoid Mito Classifier v0.2.0**.
+
+### Optional checksum verification
+
+On macOS or Linux, place the JAR and `SHA256SUMS.txt` in the same directory and run:
+
+```bash
+shasum -a 256 -c SHA256SUMS.txt
+```
+
+A successful verification should report:
+
+```text
+Nucleoid_Mito_Classifier_v0_2_0.jar: OK
+```
 
 ## Usage
 
@@ -105,7 +127,7 @@ mvn clean package
 target/Nucleoid_Mito_Classifier_v0_2_0.jar
 ```
 
-Maven coordinates:
+### Maven coordinates
 
 ```text
 io.github.nikolvolfovaweb:Nucleoid_Mito_Classifier:0.2.0
@@ -128,7 +150,12 @@ A combined summary CSV is also written for all images in the selected batch.
 
 ### Zero-object results
 
-When no C1 objects are detected, the per-object CSV still contains the complete standard 63-column header and no data rows. This preserves a consistent output schema for automated processing.
+When no C1 objects are detected, the per-object CSV contains:
+
+* the complete standard 63-column header;
+* no data rows.
+
+This preserves a consistent output schema for automated processing.
 
 ## Spatial calibration
 
@@ -157,15 +184,35 @@ It contains:
 
 The documented reference result contains:
 
-| Result              | Expected value |
-| ------------------- | -------------: |
-| All C1 objects      |            583 |
-| Colocalized         |            394 |
-| Borderline          |             47 |
-| Out of mitochondria |            142 |
-| Filtered            |              0 |
+| Result                    |           Expected value |
+| ------------------------- | -----------------------: |
+| All C1 objects            |                      583 |
+| Colocalized               |                      394 |
+| Borderline                |                       47 |
+| Out of mitochondria       |                      142 |
+| Filtered                  |                        0 |
+| Mitochondrial mask status |            `OK_STANDARD` |
+| Mitochondrial mask method | `STANDARD_BG20_TRIANGLE` |
 
 The example supports installation and reproducibility checks. It is not presented as a biological benchmark or as validation across different sample types, microscopes, acquisition settings, or laboratories.
+
+## Validation performed for version 0.2.0
+
+The final workflow-generated JAR was tested using the reproducible example input.
+
+Validation confirmed:
+
+* 583 detected C1 objects;
+* 394 colocalized objects;
+* 47 borderline objects;
+* 142 out-of-mitochondria objects;
+* 0 filtered objects;
+* 63 output columns;
+* numerical measurements identical to the verified reference output;
+* correct operation with debug mode enabled;
+* preservation of unrelated ImageJ image windows;
+* preservation of pre-existing ROI Manager content;
+* complete 63-column CSV output with zero data rows for a valid zero-C1 input.
 
 ## Resource safety
 
@@ -180,8 +227,9 @@ See [`docs/TECHNICAL_AUDIT.md`](docs/TECHNICAL_AUDIT.md) for the detailed techni
 Remaining limitations include:
 
 * the example dataset currently supports manual reproducibility checking rather than a fully automated image-analysis regression test;
-* users should verify analysis parameters and QC outputs for their own microscopy system, sample type, and acquisition conditions;
-* the plugin has been tested in a limited set of Fiji, Java, and operating-system environments.
+* users must verify analysis parameters and QC outputs for their own microscopy system, sample type, and acquisition conditions;
+* the plugin has been tested in a limited set of Fiji, Java, and operating-system environments;
+* the example dataset is not a biological benchmark or a substitute for validation on representative experimental data.
 
 ## Repository policy
 
@@ -206,7 +254,7 @@ See [`CHANGELOG.md`](CHANGELOG.md).
 
 ORCID: [0000-0002-8040-2610](https://orcid.org/0000-0002-8040-2610)
 
-Affiliations:
+### Affiliations
 
 1. Department of Paediatrics and Inherited Metabolic Disorders, First Faculty of Medicine, Charles University and General University Hospital in Prague, Prague, Czech Republic
 2. Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic
