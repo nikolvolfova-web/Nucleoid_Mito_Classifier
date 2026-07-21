@@ -544,6 +544,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
         if (rt.getCounter() > 0) {
             rt.save(new File(outDir, base + "-AllC1_ColocBorderOut_Morphology.csv").getAbsolutePath());
         } else {
+            IJ.log("No C1 objects detected; writing header-only per-object CSV.");
             writeEmptyResults(outDir, base);
         }
 
@@ -896,7 +897,7 @@ public class Nucleoid_Mito_Classifier_v0_1c implements PlugIn {
     private void writeEmptyResults(File outDir, String base) throws IOException {
         File f = new File(outDir, base + "-AllC1_ColocBorderOut_Morphology.csv");
         try (PrintWriter pw = new PrintWriter(new FileWriter(f, false))) {
-            pw.println("Image,Object_ID_AllC1,Class,ClassCode,Is_Colocalized,Is_Borderline,Is_OutOfMito,Is_Filtered,Area_px_manual,Area_um2_manual,C3_MitoMask_OverlapPct");
+            pw.println(" ,Area,Mean,StdDev,Min,Max,X,Y,XM,YM,Perim.,BX,BY,Width,Height,Major,Minor,Angle,Circ.,Feret,IntDen,RawIntDen,FeretX,FeretY,FeretAngle,MinFeret,AR,Round,Solidity,Image,Object_ID_AllC1,Class,ClassCode,Is_Colocalized,Is_Borderline,Is_OutOfMito,Is_Filtered,Area_px_manual,Area_um2_manual,C3_MitoMask_OverlapPct,C3_MitoMask_NonOverlapPct,C3_MitoMask_OverlapArea_px,C3_MitoMask_OverlapArea_um2,C1_NUCLEOIDS_Mean_manual,C1_NUCLEOIDS_StdDev_manual,C1_NUCLEOIDS_Min_manual,C1_NUCLEOIDS_Max_manual,C2_MITOS_RAW_Mean,C2_MITOS_RAW_StdDev,C2_MITOS_RAW_Min,C2_MITOS_RAW_Max,Threshold_Out_MaxOverlapPct,Threshold_Coloc_MinOverlapPct,MitoMask_MethodUsed,MitoMask_QCStatus,MitoMask_Warning,MitoMask_AreaPct,MitoMask_LargestComponentPct,MitoMask_ObjectCount,PixelWidth,PixelHeight,Unit,PluginVersion");
         }
     }
 
