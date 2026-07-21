@@ -2,12 +2,13 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it using the metadata from this file."
 type: software
 title: "Nucleoid Mito Classifier"
-version: "0.1c"
-date-released: 2026-07-17
+version: "0.2.0"
+date-released: 2026-07-21
 authors:
-  - family-names: "Volfová"
-    given-names: "Nikol"
-    orcid: "https://orcid.org/0000-0002-8040-2610"
-    affiliation: "Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague, Prague, Czech Republic; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic"
-license: BSD-3-Clause
-repository-code: "https://github.com/nikolvolfova-web/Nucleoid_Mito_Classifier"
+
+* family-names: "Volfová"
+  given-names: "Nikol"
+  orcid: "https://orcid.org/0000-0002-8040-2610"
+  affiliation: "Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague, Prague, Czech Republic; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic"
+  license: BSD-3-Clause
+  repository-code: "https://github.com/nikolvolfova-web/Nucleoid_Mito_Classifier"
