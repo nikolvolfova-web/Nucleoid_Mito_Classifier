@@ -4,6 +4,9 @@ type: software
 title: "Nucleoid Mito Classifier"
 version: "0.2.0"
 date-released: 2026-07-21
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21475477"
 authors:
   - family-names: "Volfová"
     given-names: "Nikol"
