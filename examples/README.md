@@ -84,7 +84,7 @@ Nikol Volfová
 
 ### Affiliations
 
-1. Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague, Prague, Czech Republic
+1. Department of Paediatrics and Inherited Metabolic Disorders, First Faculty of Medicine, Charles University and General University Hospital in Prague, Prague, Czech Republic
 2. Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic
 
 ### Data provenance
@@ -99,7 +99,7 @@ The example input image and the associated reference outputs are made available 
 
 Suggested attribution:
 
-> Volfová, Nikol. *Nucleoid Mito Classifier example dataset*. Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University. 2026. CC BY 4.0.
+> Volfová, Nikol. *Nucleoid Mito Classifier example dataset*. Department of Paediatrics and Inherited Metabolic Disorders, First Faculty of Medicine, Charles University and General University Hospital in Prague, Prague, Czech Republic; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic; Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University. 2026. CC BY 4.0.
 
 This data licence applies only to the example input image and reference outputs stored in the `examples/` directory. The Nucleoid Mito Classifier software source code is distributed separately under the BSD 3-Clause License.
 
