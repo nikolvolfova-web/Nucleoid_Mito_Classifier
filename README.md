@@ -208,7 +208,7 @@ ORCID: [0000-0002-8040-2610](https://orcid.org/0000-0002-8040-2610)
 
 Affiliations:
 
-1. Department of Paediatrics and Inherited Metabolic Disorders, Charles University and General University Hospital in Prague, Prague, Czech Republic
+1. Department of Paediatrics and Inherited Metabolic Disorders, First Faculty of Medicine, Charles University and General University Hospital in Prague, Prague, Czech Republic
 2. Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic
 
 ## Citation
