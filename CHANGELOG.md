@@ -61,6 +61,7 @@ No changes have been documented since version `0.2.0`.
 
 * GitHub Actions Maven builds completed successfully.
 * Workflow-generated JAR files were installed and run successfully in Fiji.
+* The final workflow-generated `v0.2.0` JAR was successfully installed and tested in Fiji before publication.
 * The reproducible example image produced:
 
   * 583 detected C1 objects;
@@ -82,7 +83,6 @@ No changes have been documented since version `0.2.0`.
 
 * The reproducible example supports manual regression and installation checks.
 * The example dataset is not presented as a biological benchmark.
-* The final workflow-generated `v0.2.0` JAR must be tested once more before the GitHub Release is published.
 * The existing `v0.1c` tag and Release must remain unchanged.
 
 ## [0.1c] - 2026-07-17
