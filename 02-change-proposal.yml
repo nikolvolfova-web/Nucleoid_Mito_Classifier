@@ -1,0 +1,97 @@
+name: Change proposal
+description: Propose a feature, methodological change, compatibility improvement, or documentation enhancement.
+title: "[Proposal]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proposing an improvement. Substantial or scientifically meaningful changes should be discussed before implementation.
+
+        Do not include patient-identifiable data, confidential images, unpublished data without permission, credentials, or other sensitive material. Use private vulnerability reporting for security concerns.
+
+  - type: checkboxes
+    id: preliminary_checks
+    attributes:
+      label: Preliminary checks
+      options:
+        - label: I searched the existing issues and pull requests for a similar proposal.
+          required: true
+        - label: This proposal does not disclose a suspected security vulnerability.
+          required: true
+        - label: I have not included sensitive or confidential information.
+          required: true
+
+  - type: dropdown
+    id: proposal_area
+    attributes:
+      label: Proposal area
+      options:
+        - Segmentation or object detection
+        - Measurement or spatial calibration
+        - Classification or filtering
+        - Input validation or supported formats
+        - CSV, image, log, or QC outputs
+        - Fiji compatibility or usability
+        - Performance or resource handling
+        - Build, dependencies, or GitHub Actions
+        - Documentation or reproducibility
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+      description: Explain the limitation, use case, or research need that motivates this proposal.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed change
+      description: Describe the desired behaviour and the scope of the change.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scientific_rationale
+    attributes:
+      label: Scientific or methodological rationale
+      description: If the proposal can affect segmentation, ROI geometry, calibration, measurements, thresholds, classification, filtering, or QC, explain the rationale and expected scientific effect. Otherwise write "Not applicable".
+    validations:
+      required: true
+
+  - type: textarea
+    id: output_compatibility
+    attributes:
+      label: Output and compatibility implications
+      description: Describe expected changes to CSV columns, numerical results, QC images, filenames, settings logs, existing workflows, or reference outputs. Otherwise write "None".
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Suggested validation
+      description: Explain how the change could be tested, including suitable input cases and expected results.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe current workarounds or alternative designs, if any.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add references, sanitized examples, sketches, or other relevant information.
+    validations:
+      required: false
+
