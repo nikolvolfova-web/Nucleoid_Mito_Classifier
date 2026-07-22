@@ -263,7 +263,11 @@ ORCID: [0000-0002-8040-2610](https://orcid.org/0000-0002-8040-2610)
 
 Citation metadata are provided in [`CITATION.cff`](CITATION.cff).
 
-A DOI will be added after the stable GitHub Release has been archived through Zenodo.
+Version `v0.2.0` is permanently archived on Zenodo:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21475477.svg)](https://doi.org/10.5281/zenodo.21475477)
+
+DOI: [10.5281/zenodo.21475477](https://doi.org/10.5281/zenodo.21475477)
 
 ## Licences
 
