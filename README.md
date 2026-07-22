@@ -259,6 +259,10 @@ ORCID: [0000-0002-8040-2610](https://orcid.org/0000-0002-8040-2610)
 1. Department of Paediatrics and Inherited Metabolic Disorders, First Faculty of Medicine, Charles University and General University Hospital in Prague, Prague, Czech Republic
 2. Department of Biochemistry, Cell and Molecular Biology, Third Faculty of Medicine, Charles University, Prague, Czech Republic
 
+## Acknowledgements
+
+Special thanks to Martin Čapek ([@LMCF-IMG](https://github.com/LMCF-IMG)) for his early guidance in image-analysis methods and for sharing an initial Fiji macro for nucleoid colocalization. His methodological approach provided valuable inspiration for the workflow implemented in this plugin, while the current software was developed independently.
+
 ## Citation
 
 Citation metadata are provided in [`CITATION.cff`](CITATION.cff).
