@@ -1,0 +1,133 @@
+name: Bug report
+description: Report a reproducible problem with the plugin, its outputs, installation, build, or documentation.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve Nucleoid Mito Classifier.
+
+        Do not include patient-identifiable data, confidential images, unpublished data without permission, credentials, access tokens, private keys, or other sensitive information. Report suspected security vulnerabilities privately through the repository's Security page instead of using this public form.
+
+  - type: checkboxes
+    id: preliminary_checks
+    attributes:
+      label: Preliminary checks
+      options:
+        - label: I searched the existing issues and did not find an equivalent report.
+          required: true
+        - label: This report does not disclose a suspected security vulnerability.
+          required: true
+        - label: I have removed sensitive or confidential information from all text, logs, screenshots, and attachments.
+          required: true
+
+  - type: input
+    id: affected_version
+    attributes:
+      label: Affected version
+      description: Provide the plugin release version or commit identifier.
+      placeholder: "v0.2.0 or commit SHA"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: problem_area
+    attributes:
+      label: Problem area
+      options:
+        - Plugin execution
+        - Segmentation or object detection
+        - Measurement or spatial calibration
+        - Classification or filtering
+        - CSV or image outputs
+        - Installation or Fiji compatibility
+        - Maven build or GitHub Actions
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed_behavior
+    attributes:
+      label: Observed behaviour
+      description: Describe what happened, including any incorrect counts, values, files, messages, or visual results.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected behaviour
+      description: Describe what you expected to happen and why.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide the smallest complete sequence that reproduces the problem.
+      placeholder: |
+        1. Prepare an input image with...
+        2. Start plugin version...
+        3. Use these parameters...
+        4. Inspect...
+    validations:
+      required: true
+
+  - type: textarea
+    id: input_properties
+    attributes:
+      label: Input image properties
+      description: Describe dimensions, channel order, Z and time dimensions, pixel width and height, spatial unit, and any other relevant properties. Do not attach restricted data.
+      placeholder: |
+        - Width x height:
+        - Channels and order:
+        - Z slices:
+        - Time points:
+        - Pixel width x height:
+        - Calibration unit:
+    validations:
+      required: true
+
+  - type: textarea
+    id: analysis_parameters
+    attributes:
+      label: Analysis parameters
+      description: List all non-default values and any settings relevant to reproduction.
+      placeholder: "Paste or summarize the relevant plugin settings."
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide the versions used when the problem occurred.
+      value: |
+        - Fiji / ImageJ2:
+        - ImageJ1:
+        - Java:
+        - Operating system:
+        - StarDist and related Fiji update sites:
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output or stack trace
+      description: Remove sensitive paths, usernames, hostnames, identifiers, and data before pasting logs.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add sanitized screenshots, redistributable minimal examples, workarounds, or other useful context.
+    validations:
+      required: false
+
