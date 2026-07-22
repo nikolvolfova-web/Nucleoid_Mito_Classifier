@@ -1,370 +1,133 @@
 # Contributing to Nucleoid Mito Classifier
 
-Thank you for your interest in improving Nucleoid Mito Classifier.
+Thank you for your interest in improving Nucleoid Mito Classifier. Contributions that improve correctness, reproducibility, documentation, testing, or compatibility with Fiji/ImageJ are welcome.
 
-This repository contains research software for Fiji/ImageJ. Contributions must preserve technical correctness, reproducibility, data safety, and clear documentation.
+## Before you begin
 
-## Ways to contribute
+Please check the existing issues and pull requests before starting work. For a substantial change, open an issue first so that the proposed scope and scientific implications can be discussed before implementation.
 
-You may contribute by:
+By contributing, you agree that your contribution may be distributed under the repository's BSD 3-Clause License.
 
-* reporting a reproducible software bug;
-* proposing a new feature;
-* improving documentation;
-* improving installation or build instructions;
-* adding or improving automated tests;
-* proposing a scientifically justified methodological change;
-* contributing a legally redistributable test image or validation dataset;
-* reviewing Pull Requests.
+## Reporting bugs
 
-Security vulnerabilities and reports containing sensitive information must not be submitted as public Issues. See `SECURITY.md`.
+When reporting a bug, include enough information to reproduce it whenever possible:
 
-## Before opening an Issue
+- a clear description of the observed and expected behaviour;
+- the plugin version or commit used;
+- Fiji/ImageJ, ImageJ1, Java, and operating-system versions;
+- relevant input-image properties, including dimensions, channel order, and spatial calibration;
+- the analysis parameters used;
+- relevant ImageJ log messages or stack traces;
+- a minimal anonymized and redistributable example, if one can be shared legally and ethically.
 
-Search existing Issues before creating a new one.
+Do not submit patient-identifiable, confidential, or unpublished microscopy data without permission.
 
-For software bugs, include:
+## Reporting security vulnerabilities
 
-* plugin version;
-* Fiji/ImageJ2 version;
-* ImageJ1 version;
-* Java version;
-* operating system;
-* exact steps needed to reproduce the problem;
-* expected behaviour;
-* observed behaviour;
-* relevant messages from the ImageJ log;
-* relevant parts of `Analysis_Log.txt`;
-* whether the problem occurs with the reproducible example dataset.
+Do not disclose suspected security vulnerabilities in a public issue. Use GitHub's **Private vulnerability reporting** feature in the repository's **Security** section instead.
 
-When possible, include a minimal reproducible example that can legally and ethically be shared.
+Do not include passwords, access tokens, private keys, credentials, or other secrets in an issue, pull request, commit, or shared log.
 
-Do not upload:
+## Development requirements
 
-* patient-identifiable data;
-* confidential or unpublished data without permission;
-* access tokens, passwords, API keys, SSH keys, or credentials;
-* personal information;
-* internal network paths or sensitive institutional information;
-* microscopy data that you are not authorised to redistribute.
+To build the project, you need:
 
-## Development setup
+- JDK 8 or later;
+- Apache Maven.
 
-### Requirements
+Functional validation also requires Fiji/ImageJ with the dependencies documented in [`README.md`](README.md), including the required StarDist update sites.
 
-* Git;
-* JDK 8 or later;
-* Apache Maven;
-* Fiji/ImageJ with the dependencies documented in `README.md`.
+## Setting up a contribution
 
-### Clone the repository
+1. Fork the repository on GitHub.
+2. Clone your fork:
 
-```bash
-git clone https://github.com/nikolvolfova-web/Nucleoid_Mito_Classifier.git
-cd Nucleoid_Mito_Classifier
-```
+   ```bash
+   git clone https://github.com/<YOUR_GITHUB_USERNAME>/Nucleoid_Mito_Classifier.git
+   cd Nucleoid_Mito_Classifier
+   ```
 
-### Build the project
+3. Create a focused branch from the current `main` branch:
+
+   ```bash
+   git switch main
+   git pull --ff-only origin main
+   git switch -c <TYPE>/<SHORT-DESCRIPTION>
+   ```
+
+   Examples: `fix/calibration-validation`, `docs/installation-notes`, or `test/csv-schema`.
+
+4. Make the smallest coherent change that resolves the issue.
+5. Do not commit generated build output, routine analysis output, large raw datasets, or local IDE files.
+
+## Building and checking the project
+
+Run the Maven build from the repository root:
 
 ```bash
 mvn clean package
 ```
 
-The generated JAR is written to the `target/` directory.
+The build must complete successfully before a pull request is submitted. The expected JAR path is documented in [`README.md`](README.md).
 
-### Run automated tests
+The repository does not currently provide a fully automated image-analysis regression test. For changes that can affect scientific results or Fiji behaviour, also perform relevant manual validation in the intended Fiji environment. When applicable:
 
-```bash
-mvn clean test
-```
+- use the reproducible dataset in [`examples/`](examples/);
+- compare object counts, classifications, the 63-column CSV schema, numerical measurements, logs, and QC outputs with the documented reference;
+- test zero-object handling if CSV creation or object processing changes;
+- verify preservation of unrelated ImageJ windows and pre-existing ROI Manager content if resource handling changes;
+- record the Fiji/ImageJ, Java, and operating-system versions used.
 
-All available automated tests must pass before a Pull Request is merged.
+Do not update reference outputs merely to make an unexplained result change appear successful. Explain and justify any intentional scientific-output change in the pull request.
 
-## Branch workflow
+## Scientific and implementation principles
 
-Do not work directly on `main`.
+Contributions must preserve the documented methodological principle unless a deliberate methodological change has first been discussed and clearly documented:
 
-Create a separate branch from the latest `main`:
+- C1 objects are segmented independently of the C3 mitochondrial mask;
+- morphology and C1 intensity are measured from the complete C1 ROI;
+- the C3 mask is used only for overlap-based classification and must not alter C1 ROI geometry.
 
-```bash
-git switch main
-git pull
-git switch -c <BRANCH_NAME>
-```
+Changes affecting segmentation, calibration, measurements, thresholds, classification, filtering, CSV columns, or QC outputs must describe their scientific effect and any compatibility implications.
 
-Recommended branch names:
+## Documentation and data
 
-```text
-fix/<short-description>
-feature/<short-description>
-docs/<short-description>
-test/<short-description>
-release/<version>
-```
+- Keep implementation, `README.md`, `CHANGELOG.md`, examples, and citation or release metadata consistent when a change affects them.
+- Use clear units and distinguish pixel-based from calibrated measurements.
+- Do not invent validation results, DOI values, author details, affiliations, funding information, or other metadata.
+- Small test fixtures under `examples/` must be anonymized, redistributable, and accompanied by appropriate provenance and licensing information.
+- Software source contributions are covered by the BSD 3-Clause License. Example data and reference outputs are separately licensed as described in [`examples/LICENSE.md`](examples/LICENSE.md).
 
-Examples:
+## Commits
 
-```text
-fix/preserve-image-calibration
-feature/add-summary-output
-docs/update-installation
-test/add-csv-schema-test
-```
-
-Keep each branch focused on one logical change.
-
-## Commit messages
-
-Use short, clear, imperative commit messages.
-
-Examples:
+Write concise, imperative commit messages that describe one logical change. For example:
 
 ```text
-Fix zero-object CSV schema
-Add input calibration test
-Update Fiji installation instructions
-Document validation limitations
+Validate anisotropic pixel calibration
 ```
 
-Avoid vague commit messages such as:
+Avoid mixing unrelated formatting, documentation, and functional changes in one commit or pull request.
 
-```text
-Update
-Changes
-Fix stuff
-New version
-```
+## Pull requests
 
-## Pull Requests
+Open the pull request against `main`. In the description, include:
 
-All routine changes should be submitted through a Pull Request targeting `main`.
+- the problem and the proposed solution;
+- the related issue, if any;
+- whether scientific results or output formats can change;
+- the checks and manual validation performed;
+- the test environment, when Fiji validation was required;
+- documentation, example, or reference-output changes;
+- any known limitations or follow-up work.
 
-A Pull Request should explain:
+The required GitHub checks, including the Maven build, must pass. Address review comments with additional commits; do not force-push during active review unless it is necessary and clearly communicated.
 
-* what was changed;
-* why the change is needed;
-* which files were modified;
-* how the change was tested;
-* whether numerical results changed;
-* whether object classifications changed;
-* whether the CSV schema changed;
-* whether reference outputs changed;
-* whether documentation or citation metadata must be updated.
+Repository maintainers may request changes or decline contributions that cannot be reproduced, conflict with the documented methodology, introduce unsupported data, or lack sufficient validation.
 
-The Maven build must pass before merging.
+## Release and version metadata
 
-Resolve all review comments and discussions before merging.
-
-## Scientific and algorithmic changes
-
-Changes affecting segmentation, measurement, classification, thresholds, filtering, preprocessing, masks, or output values require additional documentation.
-
-The Pull Request must include:
-
-* the scientific or technical reason for the change;
-* the previous behaviour;
-* the new behaviour;
-* the affected parameters;
-* a comparison of previous and new outputs;
-* an explanation of whether the change is backward compatible;
-* updated tests;
-* updated reference outputs when applicable;
-* an update to `CHANGELOG.md`;
-* an update to `README.md` when user-visible behaviour changes.
-
-Do not change scientific defaults without documenting the reason and expected consequences.
-
-Do not describe a change as biologically validated unless it has been evaluated using a documented representative validation dataset and predefined metrics.
-
-## Output compatibility
-
-Before merging a change, verify whether it affects:
-
-* CSV column names;
-* CSV column order;
-* number formats;
-* classification labels;
-* output filenames;
-* output directory structure;
-* QC image content;
-* analysis logs;
-* plugin version fields;
-* installation instructions.
-
-Breaking output changes must be clearly documented and should normally require a new minor or major version.
-
-## Testing with the reproducible example
-
-When a change can affect analysis results, run the plugin using the documented example input.
-
-Compare at least:
-
-* total detected object count;
-* classification counts;
-* number and order of CSV columns;
-* object identifiers;
-* numerical output values;
-* mitochondrial mask status and method;
-* zero-object behaviour where relevant.
-
-The current reference results are documented in `README.md` and `examples/README.md`.
-
-Expected differences must be explicitly documented. Unexpected differences must be investigated before merging.
-
-## Fiji testing
-
-A workflow-generated JAR intended for release must be installed and tested in Fiji.
-
-Before a release, verify:
-
-* the plugin appears in the expected Fiji menu;
-* the plugin starts successfully;
-* the documented example input runs successfully;
-* expected CSV and QC outputs are created;
-* unrelated ImageJ windows remain open;
-* pre-existing ROI Manager content is preserved;
-* no unexpected save prompts appear;
-* the output plugin version matches the intended release version.
-
-## Documentation changes
-
-Update documentation whenever a contribution changes:
-
-* installation;
-* usage;
-* inputs;
-* outputs;
-* dependencies;
-* parameters;
-* scientific interpretation;
-* limitations;
-* licensing;
-* citation;
-* supported versions.
-
-Relevant files may include:
-
-```text
-README.md
-CHANGELOG.md
-CITATION.cff
-examples/README.md
-docs/TECHNICAL_AUDIT.md
-CONTRIBUTING.md
-SECURITY.md
-```
-
-Do not invent test results, DOI values, ORCID identifiers, affiliations, licences, or author information.
-
-## Citation metadata
-
-Changes to `CITATION.cff` must preserve valid CFF/YAML formatting.
-
-After editing, verify:
-
-* indentation;
-* list markers;
-* version;
-* release date;
-* author name;
-* ORCID;
-* affiliations;
-* licence;
-* repository URL;
-* DOI identifiers.
-
-Never copy formatted rich text into `CITATION.cff`. Use plain text and validate the file before creating a Release.
-
-## Data contributions
-
-Only contribute images or datasets that may legally and ethically be redistributed.
-
-Before adding data, confirm:
-
-* ownership;
-* redistribution permission;
-* absence of personal identifiers;
-* absence of confidential information;
-* appropriate licence;
-* complete metadata;
-* documented channel order and calibration;
-* checksums for distributed files.
-
-Large datasets should not normally be committed directly to the Git repository. They should be archived in an appropriate research-data repository and linked using a persistent identifier.
-
-Small reproducible test fixtures may be stored in `examples/` when their redistribution rights are documented.
-
-## Dependencies
-
-Do not add a new dependency unless it is necessary.
-
-A Pull Request adding a dependency must explain:
-
-* why it is needed;
-* its licence;
-* its version;
-* its compatibility with Fiji/ImageJ;
-* its compatibility with the configured Java bytecode target;
-* whether Fiji users must enable another update site.
-
-Avoid unpinned or unnecessary dependencies.
-
-## Security and secrets
-
-Never commit:
-
-* passwords;
-* access tokens;
-* API keys;
-* private SSH keys;
-* credentials;
-* private certificates;
-* confidential configuration files.
-
-If a secret is committed:
-
-1. revoke or rotate it immediately;
-2. remove it from the repository;
-3. assess whether Git history must be cleaned;
-4. report the incident using the private process described in `SECURITY.md`.
-
-Deleting a secret from the latest commit is not sufficient if it remains in Git history.
-
-## Licences
-
-Software contributions are accepted under the repository's BSD 3-Clause License.
-
-Example data and reference outputs may use a separate licence. Do not assume that the software licence applies to datasets.
-
-By submitting a contribution, you confirm that you have the right to provide it under the applicable repository licence.
-
-## Release preparation
-
-A release Pull Request should verify consistency across:
-
-* source-code version;
-* Java class and filename;
-* Maven version;
-* generated JAR filename;
-* JAR manifest;
-* README;
-* CHANGELOG;
-* `CITATION.cff`;
-* Git tag;
-* GitHub Release title and notes;
-* Zenodo metadata.
-
-A release must not be published until:
-
-* the Maven build passes;
-* the final workflow-generated JAR has been checked;
-* required Fiji testing is complete;
-* release assets are correct;
-* checksum files match the attached assets;
-* citation metadata are valid.
+Do not change the project version, create a tag or release, update a DOI, or modify archived reference metadata unless the contribution is specifically preparing an agreed release. Release metadata must remain consistent across the Maven configuration, plugin naming, `README.md`, `CHANGELOG.md`, `CITATION.cff`, GitHub Release, and Zenodo record.
 
 ## Questions
 
-Use a GitHub Discussion or Issue for general development questions when the content is suitable for public discussion.
-
-Do not use public Issues for vulnerabilities, credentials, personal data, confidential images, or other sensitive information.
+For general questions or proposed improvements, open a GitHub issue. Use private vulnerability reporting for security-sensitive matters.
